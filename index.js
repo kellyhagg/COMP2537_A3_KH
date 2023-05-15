@@ -85,7 +85,6 @@ const setup = async () => {
   pokemons = response.data.results;
   pokemons = await filterPokemonsByType(pokemons, 'fire');
 
-  populatePokeTypesFilter()
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
   updatePaginationDiv(currentPage, numPages)
@@ -143,5 +142,6 @@ const setup = async () => {
 
 }
 
+populatePokeTypesFilter()
 
 $(document).ready(setup)
