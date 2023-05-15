@@ -67,6 +67,15 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   })
 }
 
+const filterPokemonsByType = async (pokemons, type) => {
+  const res = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
+  const pokemonNames = res.data.pokemon.map((pokemon) => pokemon.pokemon.name);
+  console.log("pokemonNames: ", pokemonNames);
+  const filteredPokemons = pokemons.filter((pokemon) => pokemonNames.includes(pokemon.name));
+  return filteredPokemons;
+}
+
+
 const setup = async () => {
   // test out poke api using axios here
 
@@ -74,14 +83,14 @@ const setup = async () => {
   $('#pokeCards').empty()
   let response = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=810');
   pokemons = response.data.results;
-
+  pokemons = await filterPokemonsByType(pokemons, 'fire');
 
   populatePokeTypesFilter()
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
   updatePaginationDiv(currentPage, numPages)
 
-
+  console.log("filteredPokemons: ", filterPokemonsByType(pokemons, 'fire'));
 
   // pop up modal when clicking on a pokemon card
   // add event listener to each pokemon card
