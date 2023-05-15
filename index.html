@@ -32,6 +32,72 @@
 
 <body>
 
+  <div id="pokeTypesFilter">
+    <input id="normal" class="typeFilter" type="checkbox" name="type" value="normal">
+    <label htmlfor="normal" for="normal"> normal </label>
+
+    <input id="fighting" class="typeFilter" type="checkbox" name="type" value="fighting">
+    <label htmlfor="fighting" for="fighting"> fighting </label>
+
+    <input id="flying" class="typeFilter" type="checkbox" name="type" value="flying">
+    <label htmlfor="flying" for="flying"> flying </label>
+
+    <input id="poison" class="typeFilter" type="checkbox" name="type" value="poison">
+    <label htmlfor="poison" for="poison"> poison </label>
+
+    <input id="ground" class="typeFilter" type="checkbox" name="type" value="ground">
+    <label htmlfor="ground" for="ground"> ground </label>
+
+    <input id="rock" class="typeFilter" type="checkbox" name="type" value="rock">
+    <label htmlfor="rock" for="rock"> rock </label>
+
+    <input id="bug" class="typeFilter" type="checkbox" name="type" value="bug">
+    <label htmlfor="bug" for="bug"> bug </label>
+
+    <input id="ghost" class="typeFilter" type="checkbox" name="type" value="ghost">
+    <label htmlfor="ghost" for="ghost"> ghost </label>
+
+    <input id="steel" class="typeFilter" type="checkbox" name="type" value="steel">
+    <label htmlfor="steel" for="steel"> steel </label>
+
+    <input id="fire" class="typeFilter" type="checkbox" name="type" value="fire">
+    <label htmlfor="fire" for="fire"> fire </label>
+
+    <input id="water" class="typeFilter" type="checkbox" name="type" value="water">
+    <label htmlfor="water" for="water"> water </label>
+
+    <input id="grass" class="typeFilter" type="checkbox" name="type" value="grass">
+    <label htmlfor="grass" for="grass"> grass </label>
+
+    <input id="electric" class="typeFilter" type="checkbox" name="type" value="electric">
+    <label htmlfor="electric" for="electric"> electric </label>
+
+    <input id="psychic" class="typeFilter" type="checkbox" name="type" value="psychic">
+    <label htmlfor="psychic" for="psychic"> psychic </label>
+
+    <input id="ice" class="typeFilter" type="checkbox" name="type" value="ice">
+    <label htmlfor="ice" for="ice"> ice </label>
+
+    <input id="dragon" class="typeFilter" type="checkbox" name="type" value="dragon">
+    <label htmlfor="dragon" for="dragon"> dragon </label>
+
+    <input id="dark" class="typeFilter" type="checkbox" name="type" value="dark">
+    <label htmlfor="dark" for="dark"> dark </label>
+
+    <input id="fairy" class="typeFilter" type="checkbox" name="type" value="fairy">
+    <label htmlfor="fairy" for="fairy"> fairy </label>
+
+    <input id="unknown" class="typeFilter" type="checkbox" name="type" value="unknown">
+    <label htmlfor="unknown" for="unknown"> unknown </label>
+
+    <input id="shadow" class="typeFilter" type="checkbox" name="type" value="shadow">
+    <label htmlfor="shadow" for="shadow"> shadow </label>
+  </div>
+
+  <div id="pokeCardsHeader">
+    <h3>Showing 10 of 810 pokemons</h3>
+  </div>
+
   <div id="pokeCards"></div>
 
   <div id="pokeModal" class="modal fade" tabindex="-1" role="dialog">
@@ -53,8 +119,22 @@
     </div>
   </div>
 
+  <div id="pagination">
+    <button id="prev" class="btn btn-primary">Prev</button>
 
-    <div id="pagination"></div>
+    <button class="btn btn-primary page ml-1 numberedButtons" value="1">1</button>
+
+    <button class="btn btn-primary page ml-1 numberedButtons active" value="2">2</button>
+
+    <button class="btn btn-primary page ml-1 numberedButtons" value="3">3</button>
+
+    <button class="btn btn-primary page ml-1 numberedButtons" value="4">4</button>
+
+    <button class="btn btn-primary page ml-1 numberedButtons" value="4">5</button>
+
+    <button id="next" class="btn btn-primary ml-1">Next</button>
+  </div>
+
 </body>
 
 </html>
