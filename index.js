@@ -3,11 +3,12 @@ let currentPage = 1;
 let pokemons = []
 
 const populatePokeTypesFilter = async () => {
+  $('#pokeTypesFilter').empty();
   const res = await axios.get('https://pokeapi.co/api/v2/type')
   const types = res.data.results.map((type) => type.name)
   types.forEach((type) => {
     $('#pokeTypesFilter').append(`
-    <input id="${type}" class="typeFilter" type="checkbox" name="type" value="${type}">
+    <input id="${type}" class="typeFilter" type="checkbox" name="type" onclick="setup()" value="${type}">
     <label htmlfor="${type}" for="${type}"> ${type} </label>
     `)
   })
