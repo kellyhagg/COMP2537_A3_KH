@@ -53,6 +53,7 @@ const updatePaginationDiv = (currentPage, numPages) => {
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   selected_pokemons = pokemons.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
   console.log("pokemonlength: ", selected_pokemons.length);
+  $('#pokeCardsHeader').html(`Showing ${selected_pokemons.length} of ${pokemons.length} pokemons`);
 
   $('#pokeCards').empty()
   selected_pokemons.forEach(async (pokemon) => {
