@@ -49,8 +49,10 @@ const updatePaginationDiv = (currentPage, numPages) => {
   }
 }
 
+
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   selected_pokemons = pokemons.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+  console.log("pokemonlength: ", selected_pokemons.length);
 
   $('#pokeCards').empty()
   selected_pokemons.forEach(async (pokemon) => {
@@ -67,29 +69,37 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   })
 }
 
-const filterPokemonsByType = async (pokemons, type) => {
-  const res = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
-  const pokemonNames = res.data.pokemon.map((pokemon) => pokemon.pokemon.name);
-  console.log("pokemonNames: ", pokemonNames);
-  const filteredPokemons = pokemons.filter((pokemon) => pokemonNames.includes(pokemon.name));
-  return filteredPokemons;
+const filterPokemonsByType = async (pokemons, selectedTypes) => {
+  let filteredPokemons = []
+  for (let i = 0; i < pokemons.length; i++) {
+    const res = await axios.get(pokemons[i].url)
+    const types = res.data.types.map((type) => type.type.name)
+    if (selectedTypes.every((type) => types.includes(type))) {
+      filteredPokemons.push(pokemons[i])
+    }
+  }
+  return filteredPokemons
 }
-
 
 const setup = async () => {
   // test out poke api using axios here
 
-
   $('#pokeCards').empty()
   let response = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=810');
   pokemons = response.data.results;
-  pokemons = await filterPokemonsByType(pokemons, 'fire');
+
+  const selectedTypes = $('.typeFilter:checked').map(function () {
+    return this.value;
+  }).get();
+
+  if (selectedTypes.length > 0) {
+    const filteredPokemons = await filterPokemonsByType(pokemons, selectedTypes);
+    pokemons = filteredPokemons;
+  }
 
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
   updatePaginationDiv(currentPage, numPages)
-
-  console.log("filteredPokemons: ", filterPokemonsByType(pokemons, 'fire'));
 
   // pop up modal when clicking on a pokemon card
   // add event listener to each pokemon card
@@ -134,12 +144,14 @@ const setup = async () => {
   // add event listener to pagination buttons
   $('body').on('click', ".numberedButtons", async function (e) {
     currentPage = Number(e.target.value)
-    paginate(currentPage, PAGE_SIZE, pokemons)
+
+    if (selectedTypes.length == 0) {
+      paginate(currentPage, PAGE_SIZE, pokemons)
+    }
 
     //update pagination buttons
     updatePaginationDiv(currentPage, numPages)
   })
-
 }
 
 populatePokeTypesFilter()
